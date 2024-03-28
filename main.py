@@ -48,6 +48,7 @@ async def load_account(token: str) -> TempClient:
 def info_account(client=None):
     with ui.card().classes("animate__animated animate__flipInX q-card-info"):
         if client:
+
             # ui.label(DATA.name)
             with ui.card_section().classes("p-0"):
                 with ui.element("div").classes("info-container"):
@@ -122,8 +123,7 @@ with ui.tab_panels(tabs, value="h").classes("w-full"):
 
         with ui.element("div").classes("cards-layout"):
             show_account()
-            ui.button(icon="add", on_click=lambda: new_account()
-                      ).classes("add-button")
+            ui.button(icon="add", on_click=lambda: new_account()).classes("add-button")
 
         with ui.element("div").classes("tab-panel-content"):
             ui.label("ACCOUNT INFO").classes("tab-panel-title")
@@ -177,8 +177,7 @@ def new_account():
             "commands": commands.value if commands.value else None,
             "daily": daily.value,
             "sell": (
-                sell.value if (not sell.value) or (
-                    not "All" in sell.value) else "All"
+                sell.value if (not sell.value) or (not "All" in sell.value) else "All"
             ),
             "solve": solve.value,
         }
@@ -207,8 +206,7 @@ def new_account():
             with stepper:
                 with ui.step("Now, Choose Your Preferred Guild!") as step:
                     guild = ui.select(
-                        options={
-                            guild.id: guild.name for guild in client.guilds},
+                        options={guild.id: guild.name for guild in client.guilds},
                         with_input=True,
                         on_change=lambda e: ui.notify(e.value),
                     )
@@ -252,8 +250,7 @@ def new_account():
                         with ui.card().classes("w-full q-card-features"):
                             gem = ui.checkbox("Use Gems Automatically")
                             pray = ui.checkbox("Pray Automatically")
-                            exp = ui.checkbox(
-                                "Send Messages To Level Up Automatically")
+                            exp = ui.checkbox("Send Messages To Level Up Automatically")
                             daily = ui.checkbox("Claim Daily Automatically")
                             solve = ui.checkbox("Enable Captcha Solving")
                             with ui.expansion(
@@ -287,8 +284,7 @@ def new_account():
                             with ui.expansion(
                                 "Selfbot Commands", icon="settings_applications"
                             ).classes("w-full"):
-                                checkbox = ui.checkbox(
-                                    "Enable Selfbot Commands")
+                                checkbox = ui.checkbox("Enable Selfbot Commands")
 
                                 commands = ui.input(
                                     "Enter Selfbot Prefix",
@@ -303,8 +299,7 @@ def new_account():
                             with ui.expansion(
                                 "Sell Animals", icon="settings_applications"
                             ).classes("w-full"):
-                                checkbox = ui.checkbox(
-                                    "Enable Selling Animals")
+                                checkbox = ui.checkbox("Enable Selling Animals")
 
                                 sell = (
                                     ui.select(
