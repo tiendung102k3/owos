@@ -122,7 +122,3 @@ class Client(discord.Client, Gem):
         await self.wait_until_ready()
 
 
-if __name__ == "__main__":
-    client = Client(Data().load("ahihiyou20"))
-    client.run(
-        "NzAzMDYzMjAyNTE4NDAxMDQ0.GmUSFJ.hweM2buTOLFlaKtl0oqapcvLrKrJjSGRa9WTqI")
