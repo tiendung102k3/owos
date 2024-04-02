@@ -1,17 +1,19 @@
 :root {
   --primary-color: pink;
-  --box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
+  --box-shadow-primary-color: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
+  --box-shadow-hover-color: 0 8px 32px 0 rgb(253, 168, 218);
   --user-info-box-color: #ffc0c0;
+  --border-primary-color: rgb(253, 168, 218);
 }
 
 body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-image: url("https://r4.wallpaperflare.com/wallpaper/77/395/701/pixel-art-andlt-aestheticandgt-town-city-waneella-hd-wallpaper-16afb7bd0dcf0939c31e6ab1f00dc4fb.jpg");
+  background-image: url("https://i.pinimg.com/originals/99/8e/05/998e055aba57c24138220937cc5166ab.gif");
   background-repeat: no-repeat;
   background-position: center;
-  object-fit: cover;
+  background-size: cover;
   font-family: "Prompt", sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -43,7 +45,7 @@ body {
   max-width: 300px;
   padding: 5px 10px;
   background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px 0 rgba(253, 168, 218, 0.644);
+  box-shadow: var(--box-shadow-primary-color);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
   border-radius: 99px !important;
@@ -52,10 +54,7 @@ body {
   transition: 0.3s ease-in-out;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 32px 0 rgb(253, 168, 218);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--box-shadow-hover-color);
     border-radius: 99px !important;
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
@@ -98,7 +97,7 @@ body {
 .q-tab-panels {
   color: white;
   background: rgba(255, 255, 255, 0.05);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-primary-color);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
   border-radius: 10px !important;
@@ -115,7 +114,7 @@ body {
 }
 
 .tab-panel-title {
-  font-size: 30px;
+  font-size: 35px;
   display: inline-block;
   position: relative;
   transition: 0.3s ease;
@@ -154,8 +153,8 @@ body {
   overflow: hidden;
 
   &:hover {
-    box-shadow: var(--box-shadow);
-    border: 1px solid rgb(253, 168, 218);
+    box-shadow: var(--box-shadow-hover-color);
+    border: 1px solid var(--border-primary-color);
   }
 
   &::before {
@@ -181,9 +180,10 @@ body {
   width: 1000px;
   position: relative;
   text-align: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 10px !important;
-  border: 1px solid rgb(253, 168, 218);
+  border: 1px solid var(--border-primary-color);
   overflow: hidden;
 }
 
@@ -196,9 +196,12 @@ body {
   text-align: center;
 }
 
+.looking-img {
+  width: 300px;
+}
+
 .info-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 30px;
   width: 100%;
@@ -255,7 +258,6 @@ body {
 }
 
 .info-container .user-status {
-  width: 70%;
   text-align: justify;
   flex-wrap: nowrap;
 }
@@ -288,7 +290,7 @@ body {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   box-shadow: var(--box-shadow);
-  border: 1px solid rgb(253, 168, 218);
+  border: 1px solid var(--border-primary-color);
   border-radius: 10px !important;
 }
 
@@ -298,7 +300,7 @@ body {
 
 .q-stepper__dot {
   background: transparent;
-  border: 1px solid rgb(253, 168, 218);
+  border: 1px solid var(--border-primary-color);
 }
 
 .q-field__input {
@@ -327,7 +329,7 @@ body {
   scrollbar-width: none;
   backdrop-filter: blur(10px);
   box-shadow: var(--box-shadow);
-  border: 1px solid rgb(253, 168, 218);
+  border: 1px solid var(--border-primary-color);
   border-radius: 10px !important;
 }
 
@@ -336,7 +338,7 @@ body {
   scrollbar-width: none;
   background: transparent;
   box-shadow: var(--box-shadow);
-  border: 1px solid rgb(253, 168, 218);
+  border: 1px solid var(--border-primary-color);
 }
 
 .q-item__section--side>.q-icon {
@@ -376,8 +378,8 @@ body {
   }
 
   50% {
-    box-shadow: var(--box-shadow);
-    border: 1px solid rgb(253, 168, 218);
+    box-shadow: var(--box-shadow-primary-color);
+    border: 1px solid var(--border-primary-color);
   }
 
   100% {
@@ -401,15 +403,11 @@ body {
 }
 
 @keyframes animate4 {
-  0% {
+  from {
     transform: rotate(45deg);
   }
 
-  50% {
-    transform: rotate(315deg);
-  }
-
-  100% {
-    transform: rotate(45deg);
+  to {
+    transform: rotate(225deg);
   }
 }

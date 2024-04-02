@@ -1,6 +1,6 @@
 from aiohttp import ClientSession, CookieJar
 
-from logger import logger
+from src.logger import logger
 
 
 async def submit_oauth(res):

@@ -1,7 +1,7 @@
 from twocaptcha import TwoCaptcha
 
-from logger import logger
-from oauth2 import get_oauth
+from src.logger import logger
+from src.oauth2 import get_oauth
 
 solver = TwoCaptcha(**{
     'server':           "2captcha.com",
@@ -11,17 +11,17 @@ solver = TwoCaptcha(**{
 })
 
 
-def is_captcha(message, guild):
-    if message.author.id == 408785106942164992:
-        if message.guild and message.guild == guild:
-            user = message.guild.me
-            if (user in message.mentions) and ("a real human" in message.content):
-                return True
+def is_captcha(user, message) -> bool:
+    # if message.channel.id == 1215633896675475466:
+    #     print(message.content)
+    if message.author.id == 408785106942164992 and str(user.id) in message.content:
+        if "captcha" in message.content:
+            return True
 
     return False
 
 
-async def solve_captcha(token):
+async def solve_captcha(token) -> None:
 
     result = solver.hcaptcha(
         sitekey='a6a1d5ce-612d-472d-8e37-7601408fbc09',

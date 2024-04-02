@@ -15,7 +15,7 @@ app.add_static_files("/static", "static")
 
 ui.add_head_html(
     """ 
-                    <link rel='stylesheet' type="text/css" href="/static/styles.css">
+                    <link rel='stylesheet' type="text/css" href="./static/styles.css">
                    
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,6 @@ async def load_account(token: str) -> TempClient:
 def info_account(client=None):
     with ui.card().classes("animate__animated animate__flipInX q-card-info"):
         if client:
-            # ui.label(DATA.name)
             with ui.card_section().classes("p-0"):
                 with ui.element("div").classes("info-container"):
                     with ui.element("div").classes("user-info"):
@@ -66,15 +65,14 @@ def info_account(client=None):
                         ui.label(f"Guild: {client.get_guild(DATA.guild).name}")
                         ui.label(
                             f"Channel: {client.get_channel(DATA.channel).name}")
+                    ui.element("div").classes("seperator")
+                    with ui.element("div").classes("user-status"):
+                        for _ in range(5):
+                            ui.label("user status 2")
 
-            #     with ui.splitter() as splitter:
-            #         with splitter.before:
-            #             ui.label("PLACE HOLDER")
-            #         with splitter.after:
-            #             for _ in range(2):
-            #                 ui.label("PLACE HOLDER")
         else:
-            ui.label("No Account Selected")
+            ui.label("No Account Selected").classes('w-full text-h4')
+            ui.image('./static/lf.gif').classes('looking-img')
 
 
 @ui.refreshable
