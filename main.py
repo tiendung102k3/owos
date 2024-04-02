@@ -15,7 +15,7 @@ app.add_static_files("/static", "static")
 
 ui.add_head_html(
     """ 
-                    <link rel='stylesheet' type="text/css" href="./static/styles.css">
+                    <link rel='stylesheet' href="./static/styles.css">
                    
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

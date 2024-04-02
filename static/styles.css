@@ -102,6 +102,9 @@ body {
   -webkit-backdrop-filter: blur(1px);
   border-radius: 10px !important;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  height: 560px;
+  overflow: scroll;
+  scrollbar-width: none;
 }
 
 .q-panel {
