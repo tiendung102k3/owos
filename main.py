@@ -48,6 +48,11 @@ async def load_account(token: str) -> TempClient:
 def info_account(client=None):
     with ui.card().classes("animate__animated animate__flipInX q-card-info"):
         if client:
+<<<<<<< HEAD
+=======
+
+            # ui.label(DATA.name)
+>>>>>>> 82730223eb75cbd0f082d70d7c73d60dd83f6e4a
             with ui.card_section().classes("p-0"):
                 with ui.element("div").classes("info-container"):
                     with ui.element("div").classes("user-info"):
@@ -65,10 +70,13 @@ def info_account(client=None):
                         ui.label(f"Guild: {client.get_guild(DATA.guild).name}")
                         ui.label(
                             f"Channel: {client.get_channel(DATA.channel).name}")
+<<<<<<< HEAD
                     ui.element("div").classes("seperator")
                     with ui.element("div").classes("user-status"):
                         for _ in range(5):
                             ui.label("user status 2")
+=======
+>>>>>>> 82730223eb75cbd0f082d70d7c73d60dd83f6e4a
 
         else:
             ui.label("No Account Selected").classes('w-full text-h4')

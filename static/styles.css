@@ -169,6 +169,7 @@ body {
     transition: 0.3s ease-in-out;
   }
 }
+<<<<<<< HEAD
 
 .q-card-select .q-card__section {
   display: flex;
@@ -261,6 +262,8 @@ body {
   text-align: justify;
   flex-wrap: nowrap;
 }
+=======
+>>>>>>> 82730223eb75cbd0f082d70d7c73d60dd83f6e4a
 
 .q-card:hover:before {
   height: 5px;
@@ -341,10 +344,13 @@ body {
   border: 1px solid var(--border-primary-color);
 }
 
+<<<<<<< HEAD
 .q-item__section--side>.q-icon {
   color: white;
 }
 
+=======
+>>>>>>> 82730223eb75cbd0f082d70d7c73d60dd83f6e4a
 .q-checkbox__inner--truthy {
   color: var(--primary-color);
 }
@@ -386,6 +392,7 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.445);
     border: 1px solid transparent;
   }
+<<<<<<< HEAD
 }
 
 @keyframes animate3 {
@@ -410,4 +417,6 @@ body {
   to {
     transform: rotate(225deg);
   }
+=======
+>>>>>>> 82730223eb75cbd0f082d70d7c73d60dd83f6e4a
 }
