@@ -226,7 +226,7 @@ body {
     background: var(--primary-color);
     transform: rotate(45deg);
     transition: 0.3s ease-in-out;
-    animation: animate4 2s infinite;
+    animation: animate4 2s linear infinite;
   }
   &::after {
     border-radius: 10px;
