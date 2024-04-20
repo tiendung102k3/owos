@@ -7,7 +7,7 @@ from random import randint
 
 from src.logger import logger
 from src.captcha_handler import is_captcha, solve_captcha
-from data2 import Data
+from src.data import Data
 from gem import Gem
 
 
