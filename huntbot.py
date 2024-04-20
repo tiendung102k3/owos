@@ -1,25 +1,28 @@
 from ultralytics import YOLO
 
-
+path = ""
 ############ NEW MODEL ############
-# model = YOLO('yolov8m.pt')
+# model = YOLO('yolov8s.pt')
 
 # results = model.train(
-#     data=r'C:\Users\ducna\Desktop\huntbot.v2-ver1.yolov5pytorch\data.yaml',
+#     data=path,
 #     device="cpu",
-#     weight_decay=0.0010,
+#     cos_lr=True,
+#     warmup_epochs=15,
+#     box=8,
+#     label_smoothing=0.2,
+#     dropout=0.5,
+#     weight_decay=0.001,
 #     epochs=50,
 #     imgsz=640)
 
 # ############ RESUME TRAINING ############
-# model = YOLO(
-#     r"C:\Users\ducna\Desktop\huntbot.v2-ver1.yolov5pytorch\runs\detect\train\weights\last.pt")
+# model = YOLO(path + r"\last")
 
 # results = model.train(resume=True)
 
 ############ PREDICT ############
-model = YOLO(
-    r"C:\Users\ducna\Desktop\huntbot.v2-ver1.yolov5pytorch\runs\detect\train\weights\best.pt")
+model = YOLO(path + r"\best")
 
 results = model.predict(r"C:\Users\ducna\Desktop\huntbot\captchas",
                         visualize=True,
