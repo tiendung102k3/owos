@@ -1,51 +1,72 @@
 from json import load, dump
-from typing import Type
+from typing import Any, Self, Literal
+from dataclasses import dataclass, field, asdict
 
 
+@dataclass
 class Data:
-    def __init__(self) -> Type["Data"]:
-        """
-        Constructor for the Data class.
+    data: dict[str, Any] = None  # Data from config.json file
 
-        Initializes the data of a specific account based on the provided 'account' parameter.
+    name: str = None  # Name of The Account
+    token: str = None  # Authorization Token
+    channel: int = None  # Channel ID
+    guild: int = None  # Guild ID
+    pray: bool = False  # Pray Mode
+    exp: bool = False  # Send Messages to Level Up Or Not
+    commands: str = None  # Selfbot Commands Prefix
+    daily: bool = False  # Claim Daily
+    _sell: list[Literal["Common", "Uncommon", "Rare", "Epic",
+                        "Mythical", "Gem", "Legendary", "Fabled"]] | Literal["All"] = None
+    # Sell Animals Mode
+    solve: str = None  # Captcha Solving (APIKEY)
+    _huntbot: int = None
+    gem: dict[str, bool] = field(
+        default_factory=lambda: dict(enabled=False, star=False))  # Gem Mode
+    webhook: dict[str, str | int] = field(
+        default_factory=lambda: dict(url=None, ping=None, ping_self=None))
+    # Webhook Configuration
 
-        """
+    @property
+    def sell(self) -> list[Literal["Common", "Uncommon", "Rare", "Epic", "Mythical", "Gem", "Legendary", "Fabled"]] | Literal["All"]:
+        return self._sell
 
-        # Path to the configuration file
+    @sell.setter
+    def sell(self, value: list[str]) -> None:
+        if "All" in value:
+            self._sell = "All"
+        else:
+            self._sell = value
 
-        # Name of the account
-        self.name = None
+    @property
+    def huntbot(self) -> int:
+        return self._huntbot
 
-        # URL To The Avatar
-        self.avatar = None
-        # Token for the account
-        self.token = None
+    @huntbot.setter
+    def huntbot(self, value) -> None:
+        if str(value).isnumeric():
+            self._huntbot = int(value)
+        else:
+            self._huntbot = False
 
-        # Guild or server the account is associated with
-        self.guild = None
-
-        # Channel or room the account is associated with
-        self.channel = None
-
-        # Flags indicating the state of various features
-        self.gem = False  # Gem collection feature
-        self.pray = False  # Praying feature
-        self.exp = False  # Experience gain feature
-        self.sleep = False  # Sleeping feature
-        self.webhook = False  # Webhook feature
-        self.commands = False  # Command feature
-        self.daily = False  # Daily feature
-        self.sell = False  # Selling feature
-        self.solve = False  # Solving feature
-        self.huntbot = False
-
-        # Load the configuration data from the JSON file
-        with open("config2.json", "r") as f:
+    def __post_init__(self):
+        with open("config.json", "r") as f:
             self.data = load(f)
 
-        # Set the attributes of the class based on the configuration data
+    @staticmethod
+    def get_account() -> list[str]:
+        """
+        Get all account names
 
-    def load(self, account: str) -> Type["Data"]:
+        :return: list - all account names
+        """
+
+        with open("config.json", "r") as f:
+            return [account for account in load(f)]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {k: v for k, v in asdict(self).items() if k != "data"}
+
+    def load(self, account: str) -> Self:
         for key, value in self.data[account].items():
             setattr(self, key, value)
 
@@ -53,17 +74,17 @@ class Data:
 
         return self
 
-    def save(self, account: str, data: dict) -> Type["Data"]:
+    def save(self, account: str, data: dict) -> Self:
         """
         Save account data to file.
 
         :param account: str - the account to save data for
         :param data: dict - the data to save
-        :return : Type["Data"] - the account's data
+        :return : Self - the account's data
         """
         self.data.update({account: data})
 
-        with open("config2.json", 'w') as f:
+        with open("config.json", 'w') as f:
             dump(self.data, f, ensure_ascii=False, indent=4)
 
         return self
@@ -77,16 +98,5 @@ class Data:
         """
         self.data.pop(account, None)
 
-        with open("config2.json", 'w') as f:
+        with open("config.json", 'w') as f:
             dump(self.data, f, ensure_ascii=False, indent=4)
-
-    @staticmethod
-    def get_account() -> dict:
-        """
-        Get all account names
-
-        :return: dict - all account names
-        """
-
-        with open("config2.json", "r") as f:
-            return [account for account in load(f)]
