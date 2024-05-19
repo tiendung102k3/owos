@@ -1,14 +1,15 @@
+from discord import Client
 from asyncio import TimeoutError, sleep
 from random import randint
 from re import findall, finditer, MULTILINE
-
 from src.logger import logger
+from src.data import Data
 
 
 class Gem:
     def __init__(self, client):
-        self.client = client
-        self.data = client.data
+        self.client: Client = client
+        self.data: Data = client.data
 
     def __available(self, gems):
         available = {}
@@ -22,7 +23,8 @@ class Gem:
                 elif index == 2:
                     available["gem4"] = type
                 else:
-                    available["star"] = type
+                    if self.data.gem["star"]:
+                        available["star"] = type
 
         self.available = available
 
@@ -54,6 +56,7 @@ class Gem:
             inv = [int(item) for item in inv if item.isnumeric()]
         except TimeoutError:
             logger.critical("Couldn't Fetch Inventory")
+            self.available = None
             await sleep(randint(4, 6))
             await self.__fetch_gem()
 
@@ -73,24 +76,20 @@ class Gem:
                 )
         else:
             for gem in gems:
-                if "star" == gem and len(gems) == 1:
-                    return
+                if rarity == "average":
+                    avg = len(type) / 2
+                    avg = int(
+                        (avg - .5)) if len(type) % 2 != 0 else int(avg)
 
-                if gem in self.available:
-                    if rarity == "average":
-                        avg = len(type) / 2
-                        avg = int(
-                            (avg - .5)) if len(type) % 2 != 0 else int(avg)
-
-                    use.append(
-                        self.available[gem][rarity] if rarity != "average" else self.available[gem][avg]
-                    )
+                use.append(
+                    self.available[gem][rarity] if rarity != "average" else self.available[gem][avg]
+                )
 
         await self.client.get_channel(self.data.channel).send(
             f"owo use {' '.join(str(gem) for gem in use)}"
         )
 
-        await sleep(randint(4, 6))
+        await sleep(randint(6, 8))
         gems = await self.__fetch_gem()
         self.__available(gems)
 
@@ -131,6 +130,10 @@ class Gem:
         for name, count in matches:
             if int(count) > 0:
                 use.remove(name)
+
+        for gem in use:
+            if gem not in self.available:
+                use.remove(gem)
 
         # print(f"matches: {matches}")
         # print(f"Use {use}")
