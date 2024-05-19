@@ -1,5 +1,22 @@
 import logging
 
+from nicegui import ui
+
+
+class Weblogger(logging.Handler):
+    """A logging handler that emits messages to a log element."""
+
+    def __init__(self, element: ui.log, level: int = logging.NOTSET) -> None:
+        self.element = element
+        super().__init__(level)
+
+    def emit(self, record: logging.LogRecord) -> None:
+        try:
+            msg = self.format(record)
+            self.element.push(msg)
+        except Exception:
+            self.handleError(record)
+
 
 class Formatter(logging.Formatter):
     """A Custom Formatter Class For Logging"""
