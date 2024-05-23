@@ -1,6 +1,6 @@
 {
-  "token": null,
-  "channel": null,
+  "token": toek,
+  "channel": 1214063260119339058,
   "gm": true,
   "pm": true,
   "em": {
@@ -14,8 +14,8 @@
   },
   "sbcommands": {
     "enable": true,
-    "prefix": ".",
-    "allowed_id": null
+    "prefix": "$",
+    "allowed_id": 864205486977974283
   },
   "daily": true,
   "sell": {
